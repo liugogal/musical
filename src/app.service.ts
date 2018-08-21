@@ -94,8 +94,8 @@ export class AppService {
         }
         //杀掉进程
         if (process && !process.killed) {
-            process.removeAllListeners();
-            process.kill();
+            let realProcessPid: number = process.pid + 1;
+            process.kill(realProcessPid.toString());
         }
 
         //删除channelId
