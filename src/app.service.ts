@@ -62,6 +62,7 @@ export class AppService {
             console.log(`process disconnect`);
         });
 
+        console.log(process.pid);
 
         this.processDic[channelId] = process;
 
@@ -94,8 +95,7 @@ export class AppService {
         //杀掉进程
         if (process && !process.killed) {
             process.removeAllListeners();
-            // process.kill();
-            process.exit(0);
+            process.kill();
         }
 
         //删除channelId
