@@ -93,7 +93,8 @@ export class AppService {
         //杀掉进程
         if (process && !process.killed) {
             process.removeAllListeners();
-            process.kill();
+            // process.kill();
+            process.disconnect();
         }
 
         //删除channelId
