@@ -48,7 +48,7 @@ export class AppService {
             console.log(`channel:${channelId} record is start`);
         });
 
-        /*
+
         process.addListener("error",(err:Error)=>{
             console.log(`process error:${err.message}`);
         });
@@ -61,7 +61,6 @@ export class AppService {
         process.addListener('disconnect', ()=>{
             console.log(`process disconnect`);
         });
-        */
 
 
         this.processDic[channelId] = process;
@@ -94,8 +93,9 @@ export class AppService {
         }
         //杀掉进程
         if (process && !process.killed) {
-            // process.removeAllListeners();
-            process.kill();
+            process.removeAllListeners();
+            // process.kill();
+            process.exit(0);
         }
 
         //删除channelId
