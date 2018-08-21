@@ -57,6 +57,9 @@ export class AppService {
         process.addListener('close', (code: number, signal: string) => {
             console.log(`process close code:${code} signal:${signal}`);
         });
+        process.addListener('disconnect', ()=>{
+            console.log(`process disconnect`);
+        });
 
 
         this.processDic[channelId] = process;
@@ -89,8 +92,8 @@ export class AppService {
         }
         //杀掉进程
         if (process && !process.killed) {
-            process.kill();
             process.removeAllListeners();
+            process.kill();
         }
 
         //删除channelId
