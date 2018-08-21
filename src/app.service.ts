@@ -96,8 +96,8 @@ export class AppService {
         if (process && !process.killed) {
             //https://segmentfault.com/q/1010000012728403
             let realProcessPid: number = process.pid + 1;
-            // process.kill(realProcessPid.toString());
-            process.unref();
+            process.kill(process.pid + '');
+            exec(`kill ${realProcessPid}`);
         }
 
         //删除channelId
