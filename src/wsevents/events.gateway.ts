@@ -5,6 +5,7 @@ import {
     WsResponse,
 } from '@nestjs/websockets';
 import { EMPTY, Observable } from 'rxjs';
+import { ChildProcess,exec } from 'child_process';
 
 @WebSocketGateway()
 export class EventsGateway {
@@ -54,4 +55,12 @@ export class EventsGateway {
 
         return EMPTY;
     }
+
+    @SubscribeMessage('startRecord')
+    onStartRecord(client, data): Observable<WsResponse<number>> {
+
+
+        return EMPTY;
+    }
+
 }
