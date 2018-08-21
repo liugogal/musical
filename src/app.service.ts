@@ -49,18 +49,10 @@ export class AppService {
         });
 
 
-        process.addListener("error",(err:Error)=>{
-            console.log(`process error:${err.message}`);
-        });
-        process.addListener('exit', (code: number, signal: string) => {
-            console.log(`process exit code:${code} signal:${signal}`);
-        });
         process.addListener('close', (code: number, signal: string) => {
             console.log(`process close code:${code} signal:${signal}`);
         });
-        process.addListener('disconnect', ()=>{
-            console.log(`process disconnect`);
-        });
+
 
         console.log(process.pid);
 
