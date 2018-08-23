@@ -1,5 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpService } from '@nestjs/common';
 import { ChildProcess, exec } from 'child_process';
+import { map } from 'rxjs/operators';
+import { AxiosResponse } from 'axios';
 
 
 export const appId: string = '8fab9a83226540a081559b89970d81ee';
@@ -9,6 +11,10 @@ export const appliteDir: string = '/home/code/Agora_Recording/bin';
 export class AppService {
 
     processDic: any = {};
+
+    constructor(private readonly httpService: HttpService) {
+
+    }
 
     root(): string {
         return 'Hello World!';
@@ -99,6 +105,22 @@ export class AppService {
             code: 0,
             msg: '录制已停止',
         };
+    }
+
+    getUploadInfo() {
+        let url = 'http://netschool.qinyixue.xin/Api/Curriculum/GetUploadInfo';
+        let fileName = 'test.mp4';
+        let curriculumID = 'FEBCEC8B-990F-4C92-925E-430DEB7C508B';
+        return this.httpService.get(url, {
+            params: {
+                fileName: fileName,
+                curriculumID: curriculumID,
+            },
+        }).pipe(
+            map((value: AxiosResponse) => {
+                return value.data;
+            }),
+        );
     }
 
 }

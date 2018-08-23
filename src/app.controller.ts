@@ -34,4 +34,9 @@ export class AppController {
         return this.appService.stopRecord(param.channel);
 
     }
+
+    @Get('/getUploadInfo')
+    getUploadInfo(): any {
+        return this.appService.getUploadInfo();
+    }
 }

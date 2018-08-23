@@ -1,10 +1,13 @@
-import { Module } from '@nestjs/common';
+import { Module,HttpModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { EventsModule } from './wsevents';
 
 @Module({
-    imports: [EventsModule],
+    imports: [
+        EventsModule,
+        HttpModule
+    ],
     controllers: [AppController],
     providers: [AppService],
 })
