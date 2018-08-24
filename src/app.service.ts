@@ -123,4 +123,23 @@ export class AppService {
         );
     }
 
+    /*
+    getPublicData() {
+        http://vod.cn-shanghai.aliyuncs.com/
+                ?Format=json
+            &Version=2017-03-21
+            &Signature=vpEEL0zFHfxXYzSFV0n7%2FZiFL9o%3D
+        &SignatureMethod=Hmac-SHA1
+        &SignatureNonce=9166ab59-f445-4005-911d-664c1570df0f
+        &SignatureVersion=1.0
+        &Action=GetVideoPlayAuth
+        &AccessKeyId=tkHh5O7431CgWayx
+        &Timestamp=2017-03-29T09%3A22%3A32Z;
+
+        let url = 'http://vod.cn-shanghai.aliyuncs.com';
+        let Format = 'json';
+        let Signature
+    }
+    */
+
 }
