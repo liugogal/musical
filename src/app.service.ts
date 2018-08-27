@@ -7,10 +7,16 @@ import { AxiosResponse } from 'axios';
 export const appId: string = '8fab9a83226540a081559b89970d81ee';
 export const appliteDir: string = '/home/code/Agora_Recording/bin';
 
+export interface ProcessDicValue {
+    process: ChildProcess;
+    recordPath?: string;
+}
+
+
 @Injectable()
 export class AppService {
 
-    processDic: any = {};
+    processDic: { [key: string]: ProcessDicValue } = {};
 
     constructor(private readonly httpService: HttpService) {
 
@@ -33,7 +39,9 @@ export class AppService {
             };
         }
 
-        let oldProcess: ChildProcess = this.processDic[channelId];
+        let dicValue: ProcessDicValue = this.processDic[channelId];
+
+        let oldProcess: ChildProcess = dicValue.process;
         //进程已存在
         if (!!oldProcess) {
             //判断进程是否关闭
@@ -60,6 +68,13 @@ export class AppService {
                         let matchArr = value.match(/Recording directory is .(\S*)/);
                         if (matchArr && matchArr.length > 1) {
                             console.log('matchArr[1]:', matchArr[1]);
+                            let relativePath: string = matchArr[1];//相对路径
+                            let videoParentName: string = rPath.split('/')[2];//获取视频的父级目录名
+                            let cId = videoParentName.substring(0, videoParentName.indexOf('_'));//频道名称
+                            let dv = this.processDic[cId];
+                            if (dv) {
+                                dv.recordPath = relativePath;//赋值录制路径
+                            }
                         }
                     }
                 });
@@ -69,12 +84,13 @@ export class AppService {
 
         process.addListener('close', (code: number, signal: string) => {
             console.log(`process close code:${code} signal:${signal}`);
+
         });
 
 
         console.log(process.pid);
 
-        this.processDic[channelId] = process;
+        this.processDic[channelId] = { process };
 
         return {
             code: 0,
@@ -94,7 +110,7 @@ export class AppService {
             };
         }
 
-        let process: ChildProcess = this.processDic[channelId];
+        let process: ChildProcess = this.processDic[channelId].process;
         if (!process) {
             return {
                 code: -1,
@@ -109,6 +125,8 @@ export class AppService {
             process.kill();
             exec(`kill ${realProcessPid}`);
         }
+
+        console.log('stopRecord, recordPath: ', this.processDic[channelId].recordPath);
 
         //删除channelId
         delete this.processDic[channelId];
