@@ -52,7 +52,7 @@ export class AppService {
             console.log(`stdout:${stdout}`);
             console.log(`stderr:${stderr}`);
             console.log(`channel:${channelId} record is start`);
-            /*if (stdout) {
+            if (stdout) {
                 let outArr = stdout.trim().split('\n');
                 outArr.forEach((value: string) => {
                     if (value.indexOf('Recording')) {
@@ -63,7 +63,7 @@ export class AppService {
                         }
                     }
                 });
-            }*/
+            }
         });
 
 
