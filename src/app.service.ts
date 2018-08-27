@@ -49,9 +49,9 @@ export class AppService {
         let recordCommandStr = `/home/code/Agora_Recording/samples/cpp/recorder_local --appId ${appId} --uid 0 --channel ${channelId} --appliteDir ${appliteDir} --isMixingEnable 1 --mixedVideoAudio 1 &`;
 
         let process: ChildProcess = exec(recordCommandStr, (error: Error | null, stdout: string, stderr: string) => {
-            // console.log(`stdout:${stdout}`);
-            // console.log(`stderr:${stderr}`);
-            // console.log(`channel:${channelId} record is start`);
+            console.log(`stdout:${stdout}`);
+            console.log(`stderr:${stderr}`);
+            console.log(`channel:${channelId} record is start`);
             if (stdout) {
                 let outArr = stdout.trim().split('\n');
                 outArr.forEach((value: string) => {
