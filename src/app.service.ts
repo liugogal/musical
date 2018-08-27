@@ -56,7 +56,7 @@ export class AppService {
                 let outArr = stdout.trim().split('\n');
                 outArr.forEach((value: string) => {
                     console.log('value:', value);
-                    if (value.indexOf('Recording')) {
+                    if (value.indexOf('Recording') >= 0) {
                         let matchArr = value.match(/Recording directory is .(\S*)/);
                         if (matchArr && matchArr.length > 1) {
                             console.log('matchArr[1]:', matchArr[1]);
